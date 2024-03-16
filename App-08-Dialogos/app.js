@@ -41,7 +41,7 @@ async function createWindow () {
 ipcMain.on('openFile', async (event, args) => {
    
     const choosenFolders = await dialog.showOpenDialog(win,null || {
-        properties:['openDirectory','openFile']});
+        properties:[]}); //'openDirectory','openFile'
     let pathFile = choosenFolders.filePaths[0];
     
     fs.readFile(pathFile,'utf8',(err, data) => {
@@ -60,7 +60,7 @@ ipcMain.on('openFile', async (event, args) => {
 ipcMain.on('openFileImg', async (event, args) => {
    
     const choosenFolders = await dialog.showOpenDialog(win,null || {
-        properties:['openDirectory','openFile']});
+        properties:[]}); //'openDirectory','openFile'
 
     let pathFile = choosenFolders.filePaths[0];
     
@@ -68,8 +68,9 @@ ipcMain.on('openFileImg', async (event, args) => {
       
         let newPath  = __dirname+'/uploads/'+path.basename(pathFile);
 
-        fs.writeFile(newPath,data,function(err){
+        fs.writeFiles(newPath,data,function(err){
            console.log(err);
+           console.log(newPath);
         });
         
       
