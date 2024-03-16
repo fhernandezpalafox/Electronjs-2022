@@ -1,37 +1,49 @@
-const {app, BrowserWindow} =  require('electron');
+const { app, BrowserWindow } = require('electron');
 
-//console.log(app);
-
-app.on('before-quit', ()=> {
+/**
+ * Event listener for the 'before-quit' event.
+ * This event is emitted when Electron is about to quit the application.
+ */
+app.on('before-quit', () => {
     console.log('Saliendo...');
 });
 
-//var, const, let
+/**
+ * Event listener for the 'ready' event.
+ * This event is emitted when Electron has finished initializing and is ready to create browser windows.
+ */
+app.on('ready', () => {
 
-app.on('ready', ()=> {
-
+    /**
+     * Create a new browser window.
+     */
     let win = new BrowserWindow({
-        width:800,
-        height:600,
+        width: 800,
+        height: 600,
         title: 'Primera aplicación',
-        center:true,
+        center: true,
         maximizable: false,
         webPreferences: {
-            nodeIntegration:true,
-            //propiedad
-            
+            nodeIntegration: true
         }
     });
 
-    win.on('move', ()=> {
+    /**
+     * Event listener for the 'move' event.
+     * This event is emitted when the browser window is moved.
+     */
+    win.on('move', () => {
         const position = win.getPosition();
-
         console.log(position);
     });
 
-
-    win.on('closed', ()=> {
-         app.quit();
+    /**
+     * Event listener for the 'closed' event.
+     * This event is emitted when the browser window is closed.
+     * It quits the Electron application.
+     */
+    win.on('closed', () => {
+        app.quit();
     });
 
 });
